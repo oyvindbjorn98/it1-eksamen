@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <img alt="Brand" src="/images/brand.png" style="width: 25px; width: 25px; float: left">
+            Mobilbutikken</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <!-- class="active" -->
+            <li><a href="/">Forside<span class="sr-only">(current)</span></a></li>
+            <li><a href="/produkter">Produkter</a></li>
+            <li><a href="/kontakt-oss">Kontakt oss</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false">Bruker <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Profil</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Logg ut</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+{{{body}}}
+</body>
+</html>
