@@ -3,60 +3,56 @@
 
     <div class="row">
         <div class="col-lg-12">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="sok" placeholder="Skriv inn produkt">
+            <div class="input-group">
+                <input type="text" class="form-control" id="sok" placeholder="Skriv inn produkt">
                 <span class="input-group-btn">
                     <button id="sokeknapp" class="btn btn-default">Finn</button>
                 </span>
-                </div>
+            </div>
         </div>
     </div>
 
     {{#if produkter }}
-    <table class="table">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Merke</th>
-            <th width="200px;">Modell</th>
-            <th>Pris</th>
-            <th>Beskrivelse</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody id="produkttabell">
-        {{#each produkter}}
-
+        <table class="table">
+            <thead>
             <tr>
-
-                <td><img src='{{this.bilde}}' style='height: 100px;'></td>
-                <td>{{this.merke}} </td>
-                <td>{{this.modell}}</td>
-                <td>{{this.pris}}</td>
-                <td>{{this.beskrivelse}}</td>
-                <td><a href="/produkter/{{this.id}}"></a></td>
+                <th></th>
+                <th>Merke</th>
+                <th width="200px;">Modell</th>
+                <th>Pris</th>
+                <th>Beskrivelse</th>
+                <th></th>
             </tr>
-
-        {{/each}}
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="produkttabell">
+            {{#each produkter}}
+                <tr>
+                    <td><img src='{{this.bilde}}' style='height: 100px;'></td>
+                    <td>{{this.merke}} </td>
+                    <td>{{this.modell}}</td>
+                    <td>{{this.pris}}</td>
+                    <td>{{this.beskrivelse}}</td>
+                    <td><a href="/produkter/{{this.id}}" class="btn btn-success" role="button">Se detaljer</a></td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
     {{else}}
-
-        Beklager! Vi fant ingen produkter med dette navnet.
-
+        <div class="container" style="margin-top: 20px;">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Beklager!</h3>
+                </div>
+                <div class="panel-body">
+                    Vi fant ingen produkter med dette navnet.
+                </div>
+            </div>
+        </div>
     {{/if}}
 
 </div>
 
 <script>
-    Handlebars.registerHelper('link', function(object) {
-        var url = Handlebars.escapeExpression(object.bilde),
-                text = Handlebars.escapeExpression(object.text);
-
-        return new Handlebars.SafeString(
-                "<a href='" + url + "'>" + text + "</a>"
-        );
-    });
 
     $("#sokeknapp").click(function () {
         var url = "/produkter/sok/" + $('#sok').val();

@@ -2,12 +2,10 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
-//DATABASE passord = 1eriksen hos oyvind
-//DATABASE passord = hallahalla123 hos thomas
 var database = {
     host: 'localhost',
     user: 'root',
-    password: '1eriksen',
+    password: 'hallahalla123',
     database: 'mobilbutikken'
 };
 
@@ -29,16 +27,22 @@ router.get('/', function (req, res, next) {
 
 });
 
+/* GET spesifikt produkt. */
 router.get('/:id', function (req, res, next) {
+    var id = req.params.id;
+
     var connection = mysql.createConnection(database);
 
     connection.connect();
 
-    connection.query('SELECT * from produkter', function (err, rows, fields) {
+    connection.query('SELECT * from produkter where id = ' + id, function (err, rows, fields) {
         if (err) throw err;
-        res.render('produkter', {
-            title: 'Produkter',
-            produkter: rows
+
+        var produkt = rows[0];
+
+        res.render('produktDetaljer', {
+            title: produkt.merke + " " + produkt.modell,
+            produkt: produkt
         });
     });
 
@@ -46,31 +50,7 @@ router.get('/:id', function (req, res, next) {
 
 });
 
-// RETURNERER HELE TEMPLATE
-//router.post('/sok', function (req, res, next) {
-//    //console.log("req", req);
-//    var query = req.body.query;
-//
-//    var connection = mysql.createConnection(database);
-//
-//    connection.connect();
-//
-//    connection.query("select * from produkter WHERE modell LIKE '%" + query + "%'", function (err, rows, fields) {
-//        if (err) throw err;
-//        console.log("QUERY ROWS", rows);
-//        res.render('produkter', {
-//            title: 'Produkter',
-//            produkter: rows
-//        });
-//    });
-//
-//    connection.end();
-//
-//});
-
-// RETURNERER HELE TEMPLATE
 router.get('/sok/:query', function (req, res, next) {
-
     var query = req.params.query;
 
     var connection = mysql.createConnection(database);
@@ -79,7 +59,6 @@ router.get('/sok/:query', function (req, res, next) {
 
     connection.query("select * from produkter WHERE modell LIKE '%" + query + "%'", function (err, rows, fields) {
         if (err) throw err;
-        console.log("QUERY ROWS", rows);
         res.render('produkter', {
             title: 'Produktsok',
             produkter: rows

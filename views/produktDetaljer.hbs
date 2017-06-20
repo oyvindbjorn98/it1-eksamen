@@ -1,0 +1,66 @@
+<div id="produkterContainer" class="container">
+    <h1>{{title}}</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <img src='{{produkt.bilde}}' style='height: 350px;'>
+        </div>
+        <div class="col-md-8">
+            <h2>Informasjon</h2>
+            <p>Merke: {{produkt.merke}} </p>
+            <p>Modell: {{produkt.modell}}</p>
+            <p>Pris: {{produkt.pris}}</p>
+
+            <h2>Beskrivelse</h2>
+            <row>{{produkt.beskrivelse}}</row>
+
+            <div class="row" style="margin-top: 40px;">
+                <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">Bestill</button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Legg inn bestilling</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="usr">Navn:</label>
+                                    <input type="text" class="form-control" id="usr">
+                                </div>
+                                <div class="form-group">
+                                    <label for="usr">Adresse:</label>
+                                    <input type="text" class="form-control" id="usr">
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="">Med mobilabonnement</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="">Meld meg inn i produktklubb</label>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" data-dismiss="modal">Send bestilling!</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<script>
+
+</script>
