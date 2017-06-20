@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
-//DATABASE
+//DATABASE passord = 1eriksen hos oyvind
+//DATABASE passord = hallahalla123 hos thomas
 var database = {
     host: 'localhost',
     user: 'root',
@@ -28,17 +29,13 @@ router.get('/', function (req, res, next) {
 
 });
 
-router.post('/sok', function (req, res, next) {
-    //console.log("req", req);
-    var query = req.body.query;
-
+router.get('/:id', function (req, res, next) {
     var connection = mysql.createConnection(database);
 
     connection.connect();
 
-    connection.query("select * from produkter WHERE modell LIKE '%" + query + "%'", function (err, rows, fields) {
+    connection.query('SELECT * from produkter', function (err, rows, fields) {
         if (err) throw err;
-        console.log("QUERY ROWS", rows);
         res.render('produkter', {
             title: 'Produkter',
             produkter: rows
@@ -49,27 +46,71 @@ router.post('/sok', function (req, res, next) {
 
 });
 
-//app.post('/search', jsonparse, function (req, res, next) {
+// RETURNERER HELE TEMPLATE
+//router.post('/sok', function (req, res, next) {
+//    //console.log("req", req);
+//    var query = req.body.query;
 //
-//    /* data som mottas fra klienten */
-//    var searchWord = req.body.msg;
+//    var connection = mysql.createConnection(database);
 //
-//    /* din SQL-spørring */
-//    var sql = "select * from varer WHERE varenavn LIKE '%" + searchWord + "%'"; // SKRIV DIN EGEN SQL-SPØRRING HER
-//    // NB! Men denne gangen må du legge til rette for søk
-//    // …og for å få det til, må du bruke tekstmanipulasjon (concatenation)
+//    connection.connect();
 //
-//    /* Funksjon med SQL spørring... */
-//    mysqlCnx.query(sql, function (error, results, fields) {
-//        // connection.query(sql, function (error, results, fields) {
-//        if (error) throw error;
-//
-//        // skriver resultatet ut til terminalen (ikke konsollen)
-//        console.log(results[0]);
-//
-//        // sender resultatet til klienten
-//        res.send(results);
+//    connection.query("select * from produkter WHERE modell LIKE '%" + query + "%'", function (err, rows, fields) {
+//        if (err) throw err;
+//        console.log("QUERY ROWS", rows);
+//        res.render('produkter', {
+//            title: 'Produkter',
+//            produkter: rows
+//        });
 //    });
-//};
+//
+//    connection.end();
+//
+//});
+
+// RETURNERER HELE TEMPLATE
+router.get('/sok/:query', function (req, res, next) {
+
+    var query = req.params.query;
+
+    var connection = mysql.createConnection(database);
+
+    connection.connect();
+
+    connection.query("select * from produkter WHERE modell LIKE '%" + query + "%'", function (err, rows, fields) {
+        if (err) throw err;
+        console.log("QUERY ROWS", rows);
+        res.render('produkter', {
+            title: 'Produktsok',
+            produkter: rows
+        });
+    });
+
+    connection.end();
+
+});
+
+
+// RETURNERER KUN PRODUKTER-JSON
+//router.post('/sok', function (req, res, next) {
+//    //console.log("req", req);
+//    var query = req.body.query;
+//
+//    var connection = mysql.createConnection(database);
+//
+//    connection.connect();
+//
+//    connection.query("select * from produkter WHERE modell LIKE '%" + query + "%'", function (err, rows, fields) {
+//        if (err) throw err;
+//        console.log("QUERY ROWS", rows);
+//        res.status("200").send({
+//            produkter: rows
+//        });
+//    });
+//
+//    connection.end();
+//
+//});
+
 
 module.exports = router;
