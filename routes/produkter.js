@@ -6,7 +6,7 @@ var mysql = require('mysql');
 var database = {
     host: 'localhost',
     user: 'root',
-    password: 'hallahalla123',
+    password: '1eriksen',
     database: 'mobilbutikken'
 };
 
